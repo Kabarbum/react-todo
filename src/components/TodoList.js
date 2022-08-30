@@ -3,7 +3,7 @@ import {CSSTransition, TransitionGroup} from "react-transition-group";
 import TodoItem from "./TodoItem";
 
 const TodoList = ({list, dateList, removeTodo, editTodo}) => {
-    const months = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентябпя', 'Октября', 'Ноября', 'Декабря']
+    const months = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря']
 
     function getRandomColor() {
         const letters = '0123456789ABCDEF';
@@ -14,15 +14,22 @@ const TodoList = ({list, dateList, removeTodo, editTodo}) => {
         return hashColor
     }
 
+    const getDate = () => {
+        const date = new Date()
+
+        return `${date.getFullYear()}-${date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)}-${date.getDate() > 9 ? date.getDate() : '0' + date.getDate()}`
+    }
     return (
         <div className="todo__list">
             {dateList.map(
                 dateItem => {
                     let a = dateItem?.split('-')
-
+                    let classes = ["titleOfDay"]
+                    console.log(dateItem, getDate(), dateItem < getDate())
+                    classes.push(dateItem < getDate() ? "expired" : null)
                     return (
                         <div key={dateItem}>
-                            <div className='titleOfDay'>{Number(a[2])} {months[Number(a[1]) - 1]} {a[0]}</div>
+                            <div className={classes.join(' ')}>{Number(a[2])} {months[Number(a[1]) - 1]} {a[0]}</div>
                             <div style={{position: 'relative'}}>
                                 <span className='sideline' style={{backgroundColor: getRandomColor()}}/>
                                 <TransitionGroup>

@@ -98,6 +98,10 @@ input{
   border-radius: 20px;
   background-color: rgba(255,255,255,.4);
 }
+.titleOfDay.expired{
+  color: #fff2f2;
+  background-color: rgba(252, 45, 45, 0.6);
+}
 .todo__item{
   position: relative;
   width: 100%;
